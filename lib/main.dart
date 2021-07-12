@@ -1,8 +1,16 @@
+import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kamaki/data_sources/user_data_source.dart';
 import 'package:kamaki/login_page.dart';
+import 'package:kamaki/repositories/user_repo.dart';
+import 'package:kamaki/services/user_service.dart';
 
 void main() {
+  ChopperClient myClient = ChopperClient();
+  UserService _myService = UserService.Create(myClient);
+  UserDataSource _myData = UserDataSource(_myService);
+  UserRepo myRepo = UserRepo(_myData);
   runApp(MyApp());
 }
 
@@ -20,22 +28,22 @@ class MyApp extends StatelessWidget {
 
       ),
 
-      home: MyHomePage(title: "Kamaki"),
+      home: LoginPage(title: "Kamaki"),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  LoginPage({Key? key, required this.title}) : super(key: key);
 
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _LoginPageState extends State<LoginPage> {
   int _counter = 0;
 
   void _incrementCounter() {
@@ -58,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
 
-        child: Login_page(),
+        child: LoginBody(),
 
       ),
 

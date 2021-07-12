@@ -31,7 +31,7 @@ class LoginButton extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           borderRadius: new BorderRadius.all(Radius.circular(40.0)),
-          onTap:   () {},
+          onTap: ()=>onPressed(),
           child: Center(
             child: child,
           )),

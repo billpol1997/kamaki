@@ -7,7 +7,7 @@ import 'package:flutter_signin_button/button_view.dart';
 class SocialSingIn extends StatelessWidget {
   const SocialSingIn({Key? key}) : super(key: key);
   void _showButtonPressDialog(BuildContext context, String provider) {
-    Scaffold.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text('$provider Button Pressed!'),
       backgroundColor: Colors.black26,
       duration: Duration(milliseconds: 400),
@@ -23,8 +23,7 @@ class SocialSingIn extends StatelessWidget {
           Text(" sign in  ",style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold,color: Colors.white60),),
           Text("with ",style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold,color: Colors.white60),),
           Divider(),
-         Container(
-           child: Row(
+          Row(
              mainAxisAlignment: MainAxisAlignment.center,
              children: [
 
@@ -58,7 +57,7 @@ class SocialSingIn extends StatelessWidget {
                )
              ],
            ),
-         )
+
 
         ],
       ),
