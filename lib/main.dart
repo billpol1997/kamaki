@@ -3,14 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kamaki/data_sources/user_data_source.dart';
 import 'package:kamaki/login_page.dart';
+import 'package:kamaki/repositories/mapper.dart';
 import 'package:kamaki/repositories/user_repo.dart';
 import 'package:kamaki/services/user_service.dart';
 
 void main() {
-  ChopperClient myClient = ChopperClient();
+  // TODO: Add dependency injection
+  ChopperClient myClient = ChopperClient(baseUrl: 'https://randomuser.me/api');
   UserService _myService = UserService.Create(myClient);
   UserDataSource _myData = UserDataSource(_myService);
-  UserRepo myRepo = UserRepo(_myData);
+  UserMapper _myUserMapper = UserMapper();
+  UserRepo myRepo = UserRepo(
+    _myData,
+    _myUserMapper
+  );
   runApp(MyApp());
 }
 
@@ -25,9 +31,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.black.withOpacity(0.93),
         primaryTextTheme: GoogleFonts.fredokaOneTextTheme(),
         primarySwatch: Colors.blue,
-
       ),
-
       home: LoginPage(title: "Kamaki"),
     );
   }
@@ -35,7 +39,6 @@ class MyApp extends StatelessWidget {
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key, required this.title}) : super(key: key);
-
 
   final String title;
 
@@ -48,28 +51,21 @@ class _LoginPageState extends State<LoginPage> {
 
   void _incrementCounter() {
     setState(() {
-
       _counter++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.pink[800]  ,
+        backgroundColor: Colors.pink[800],
         title: Text(widget.title),
       ),
       body: Center(
-
-
-
         child: LoginBody(),
-
       ),
-
     );
   }
 }

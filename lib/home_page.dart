@@ -30,6 +30,10 @@ class HomePage extends StatelessWidget {
   }
 }
 
+// Inherited Widget
+// Provider
+// BlocProvider
+
 class UserCard extends StatelessWidget {
   const UserCard({Key? key, required this.user}) : super(key: key);
   final User user;
