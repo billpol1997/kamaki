@@ -4,20 +4,14 @@ import 'package:kamaki/models/user_model.dart';
 import 'package:kamaki/repositories/domain_response.dart';
 import 'package:kamaki/repositories/mapper.dart';
 
-
-class UserRepo
-{
+class UserRepo {
   final UserDataSource _userDataSource;
   final UserMapper _userMapper;
 
   UserRepo(this._userDataSource, this._userMapper);
-  Future<DomainResponse<List<User>>> GetUsers()
-  async {
-
-    try
-    {
-      final List<UserModel> userList = await _userDataSource.FetchUsers();
-      //*********TO-DO Mapping*********
+  Future<DomainResponse<List<User>>> getUsers() async {
+    try {
+      final List<UserModel> userList = await _userDataSource.fetchUsers();
       final List<User> users = userList.map(_userMapper.toDomain).toList();
       //same as:
       // for(UserModel userModel in userList)
@@ -25,11 +19,8 @@ class UserRepo
       //     users.add(_userMapper.toDomain(userModel));
       //   }
       return DomainResponse.success(users);
-    }catch(e)
-    {
+    } catch (e) {
       return DomainResponse.failure("Error 875");
     }
-
-
   }
 }

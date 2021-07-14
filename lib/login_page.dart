@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_signin_button/button_builder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kamaki/login_button.dart';
 import 'package:kamaki/repositories/user_repo.dart';
@@ -29,21 +28,21 @@ class LoginBody extends StatelessWidget {
                 fontWeight: FontWeight.w600),
           ),
         ),
-        Login_form(),
+        LoginForm(),
       ],
     );
   }
 }
 
-class Login_form extends StatefulWidget {
-  const Login_form({Key? key}) : super(key: key);
+class LoginForm extends StatefulWidget {
+  const LoginForm({Key? key}) : super(key: key);
 
   @override
-  _Login_formState createState() => _Login_formState();
+  _LoginFormState createState() => _LoginFormState();
 }
 
-class _Login_formState extends State<Login_form> {
-  final TextEditingController user_name = TextEditingController();
+class _LoginFormState extends State<LoginForm> {
+  final TextEditingController userName = TextEditingController();
   final TextEditingController password = TextEditingController();
   bool hideText = false;
 
@@ -55,7 +54,7 @@ class _Login_formState extends State<Login_form> {
 
   @override
   void dispose() {
-    user_name.dispose();
+    userName.dispose();
     password.dispose();
     super.dispose();
   }
@@ -78,7 +77,7 @@ class _Login_formState extends State<Login_form> {
                 fontSize: 14, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           TextField(
-            controller: user_name,
+            controller: userName,
             style: TextStyle(color: Colors.white),
             decoration: const InputDecoration(
                 labelText: 'Username or Email',
@@ -119,7 +118,7 @@ class _Login_formState extends State<Login_form> {
           ),
 
           ForgotPassword(),
-          Login_buttonWidget(),
+          LoginButtonWidget(),
           //Divider(),
 
           SocialSingIn(),
@@ -150,8 +149,8 @@ class ForgotPassword extends StatelessWidget {
   }
 }
 
-class Login_buttonWidget extends StatelessWidget {
-  const Login_buttonWidget({Key? key}) : super(key: key);
+class LoginButtonWidget extends StatelessWidget {
+  const LoginButtonWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

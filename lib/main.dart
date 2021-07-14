@@ -10,11 +10,11 @@ import 'package:kamaki/services/user_service.dart';
 
 void main() {
   // TODO: Add dependency injection
-  ChopperClient myClient = ChopperClient(baseUrl: 'https://randomuser.me/api');
-  UserService _myService = UserService.Create(myClient);
-  UserDataSource _myData = UserDataSource(_myService);
-  UserMapper _myUserMapper = UserMapper();
-  UserRepo myRepo = UserRepo(
+  final ChopperClient myClient = ChopperClient(baseUrl: 'https://randomuser.me/api');
+  final UserService _myService = UserService.create(myClient);
+  final UserDataSource _myData = UserDataSource(_myService);
+  final UserMapper _myUserMapper = UserMapper();
+  final UserRepo myRepo = UserRepo(
       _myData,
       _myUserMapper
   );
@@ -53,14 +53,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

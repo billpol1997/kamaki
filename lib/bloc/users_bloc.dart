@@ -11,12 +11,11 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
 
   @override
   Stream<UsersState> mapEventToState(UsersEvent event) async* {
-    // TODO: implement mapEventToState
     if (event is Loaded) {
       yield LoadingState();
 
       final DomainResponse<List<User>> domainResponse =
-          await userRepo.GetUsers();
+          await userRepo.getUsers();
       yield* domainResponse.when(success: (List<User> users) async* {
 
         yield UserSuccess(users);
