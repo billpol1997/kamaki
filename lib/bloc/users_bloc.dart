@@ -14,9 +14,11 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
     // TODO: implement mapEventToState
     if (event is Loaded) {
       yield LoadingState();
+
       final DomainResponse<List<User>> domainResponse =
           await userRepo.GetUsers();
       yield* domainResponse.when(success: (List<User> users) async* {
+
         yield UserSuccess(users);
       }, failure: (String userF) async* {
         yield UserFailure(userF);

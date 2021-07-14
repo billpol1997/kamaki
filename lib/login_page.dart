@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_signin_button/button_builder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kamaki/login_button.dart';
+import 'package:kamaki/repositories/user_repo.dart';
 import 'package:kamaki/social_sign_in.dart';
 
+import 'bloc/users_bloc.dart';
 import 'home_page.dart';
 
 class LoginBody extends StatelessWidget {
@@ -62,7 +65,10 @@ class _Login_formState extends State<Login_form> {
     return Container(
       padding: const EdgeInsets.all(20),
       height: 500,
-      width: MediaQuery.of(context).size.width,
+      width: MediaQuery
+          .of(context)
+          .size
+          .width,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -156,9 +162,14 @@ class Login_buttonWidget extends StatelessWidget {
         width: double.infinity,
         child: LoginButton(
           onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => HomePage()));
-          },
+            final UserRepo repo = context.read<UserRepo>();
+            Navigator
+                .of(context)
+                .push(MaterialPageRoute(builder: (context) =>
+                BlocProvider(
+                       create: (context) => UsersBloc(repo),
+                 child: HomePage())));
+            },
           child: Text("Login",
               style: TextStyle(
                   fontSize: 15,

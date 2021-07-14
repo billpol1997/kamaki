@@ -4,7 +4,7 @@ abstract class UsersEvent
 
 }
 
-class Loaded
+class Loaded extends UsersEvent
 {
 
 }

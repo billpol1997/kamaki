@@ -1,5 +1,6 @@
 import 'package:chopper/chopper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kamaki/data_sources/user_data_source.dart';
 import 'package:kamaki/login_page.dart';
@@ -14,14 +15,19 @@ void main() {
   UserDataSource _myData = UserDataSource(_myService);
   UserMapper _myUserMapper = UserMapper();
   UserRepo myRepo = UserRepo(
-    _myData,
-    _myUserMapper
+      _myData,
+      _myUserMapper
   );
-  runApp(MyApp());
+
+  runApp(MyApp(appRepo: myRepo,));
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  final UserRepo appRepo;
+
+  const MyApp({Key? key, required this.appRepo}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,7 +38,7 @@ class MyApp extends StatelessWidget {
         primaryTextTheme: GoogleFonts.fredokaOneTextTheme(),
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(title: "Kamaki"),
+      home: RepositoryProvider<UserRepo>.value(value:appRepo, child: LoginPage(title: "Kamaki")),
     );
   }
 }

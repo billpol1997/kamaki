@@ -10,11 +10,21 @@ class UserDataSource {
   Future<List<UserModel>> FetchUsers() async {
     final Response apiResponse = await _userService.FetchUsers();
 
+
+
     if (apiResponse.isSuccessful) {
+      Map<String,dynamic> kk = apiResponse.body;
+      if(apiResponse.body["results"] == null)
+      {
+        print("k");
+      }
+      print("OoO");
+
       List<Map<String, dynamic>> users =
-          apiResponse.body['results'] as List<Map<String, dynamic>>;
+      apiResponse.body["results"] as List<Map<String, dynamic>>;
 
       List<UserModel> userModels = [];
+
       for (Map<String, dynamic> user in users) {
         final String name = user['name']['first'] + ' ' + user['name']['last'];
         final int age = user['dob']['age'] as int;
@@ -22,6 +32,7 @@ class UserDataSource {
         final String gender = user['gender'];
         userModels.add(UserModel(gender, name, image, age));
       }
+
       return userModels;
     } else {
       throw Exception();
