@@ -17,9 +17,10 @@ class _$UserService extends UserService {
   final definitionType = UserService;
 
   @override
-  Future<Response<dynamic>> FetchUsers() {
+  Future<Response<dynamic>> FetchUsers(int numberOfUsers) {
     final $url = '/';
-    final $request = Request('GET', $url, client.baseUrl);
+    final $params = <String, dynamic>{'results': numberOfUsers};
+    final $request = Request('GET', $url, client.baseUrl, parameters: $params);
     return client.send<dynamic, dynamic>($request);
   }
 }

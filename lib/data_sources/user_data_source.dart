@@ -10,7 +10,7 @@ class UserDataSource {
   UserDataSource(this._userService);
 
   Future<List<UserModel>> fetchUsers() async {
-    final Response apiResponse = await _userService.FetchUsers();
+    final Response apiResponse = await _userService.FetchUsers(10);
 
     if (apiResponse.isSuccessful) {
       Map<String, dynamic> decodedBody = jsonDecode(apiResponse.body);
